@@ -64,7 +64,10 @@
 
     <section>
         <p>
-            This page contains illustrative animations of 2D signal-rule decoders introduced in Local decoding of the toric code under high noise, L. Paletta, 2026. The rule aim to match the -1 stabilizer measurement (defects) shown in dark blue.
+            This page contains illustrative animations of 2D signal-rule decoders introduced in Local decoding of the toric code under high noise, L. Paletta, 2026.
+
+            Each lattice site has a small local memory that stores the value of the local stabilizer measurement outcome (-1 values are called defects, shown in dark blue), along with 12 binary variables (1- and 2-forward signals, and 1- and 2-anti-signals, each subdivided by cardinal direction) 
+            and 6 integer variables (1- and 2-stacks, also subdivided by cardinal direction).
         </p>
 
         <!-- Central figure -->
@@ -77,8 +80,7 @@
     
         <!-- Explanatory text before GIFs -->
         <p>
-            Each lattice site has a small local memory that stores 12 binary variables (1- and 2-forward signals, and 1- and 2-anti-signals, each subdivided by cardinal direction) 
-            and 6 integer variables (1- and 2-stacks, also subdivided by cardinal direction).
+            The rule aim to match defects by pair, by mediating an attractive interaction between them.
         </p>
 
         <div class="gif-grid">
@@ -102,7 +104,7 @@
             <li>defect &gt; 1-forward-signal &gt; 2-forward-signal</li>
             <li>1-stack &gt; 2-stack &gt; 1-anti-signal &gt; 2-anti-signal</li>
         </ul>
-        <p>Other printing rules include
+        <p>Other printing rules include:
         <ul>
             <li>Several signals of the same type on the same site are indicated by a square</li>
             <li>The maximum of the local stack is printed in white</li>
