@@ -1,93 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Decoder Animations | Louis Paletta</title>
+<head>
+    <title>Louis Paletta</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- new.css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-      nav a.active {
-        font-weight: bold;
-      }
-
-      .gif-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        margin: 2rem 0;
-      }
-
-      .gif-grid figure {
-        text-align: center;
-      }
-
-      .gif-grid img {
-        max-width: 100%;
-        border-radius: 6px;
-      }
-
-      .gif-grid figcaption {
-        margin-top: 0.75rem;
-        font-size: 0.95em;
-      }
-
-      @media (max-width: 700px) {
-        .gif-grid {
-          grid-template-columns: 1fr;
+        img.orcid-logo {
+            vertical-align: middle; /* Align the middle of the image with the middle of the text */
+            height: 1em; /* Adjust the size of the ORCID icon relative to the font size */
+            width: auto;
         }
-      }
+
+        nav a.active {
+            font-weight: bold; /* Makes the text bold */
+        }
+
+        .gif-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .gif-grid figure {
+            text-align: center;
+        }
+
+        .gif-grid img {
+            max-width: 100%;
+            border-radius: 6px;
+        }
+
+        .gif-grid figcaption {
+            margin-top: 0.75rem;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 700px) {
+            .gif-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-  </head>
-
-  <body>
+</head>
+<body>
     <header>
-      <h1>Decoder Animations</h1>
-      <p>Local and cellular automaton decoders for quantum error correction</p>
+        <h1>Louis Paletta</h1>
+        <p>Postdoctoral Researcher in Quantum Information, Technical University of Munich</p>
 
-      <nav>
-        <a href="index.html">About</a> &nbsp; &nbsp;
-        <a href="research.html">Research</a> &nbsp; &nbsp;
-        <a href="teaching.html">Teaching</a> &nbsp; &nbsp;
-        <a href="animation.html" class="active">Animation</a>
-      </nav>
+        <nav>
+            <a href="index.html">About</a> &nbsp; &nbsp;
+            <a href="research.html">Research</a> &nbsp; &nbsp;
+            <a href="teaching.html">Teaching</a> &nbsp; &nbsp;
+            <a href="animation.html" class="active">Animation</a>
+        </nav>
     </header>
 
     <section>
-      <p>
-        This page contains illustrative animations of local decoding dynamics used
-        in my work on fault-tolerant quantum error correction.
-        The GIFs below visualize defect motion and annihilation under purely local rules.
-      </p>
+        <p>
+            This page contains illustrative animations of local decoding dynamics used
+            in my work on fault-tolerant quantum error correction.
+            The GIFs below visualize defect motion and annihilation under purely local rules.
+        </p>
 
-      <div class="gif-grid">
-        <figure>
-          <img src="decoder_1d_repetition.gif"
-               alt="Local decoder dynamics for the 1D repetition code">
-          <figcaption>
-            Local decoder for the 1D repetition code.
-            Defects propagate and annihilate under nearest-neighbor update rules.
-          </figcaption>
-        </figure>
+        <div class="gif-grid">
+            <figure>
+                <img src="decoder_1d_repetition.gif" alt="Local decoder dynamics for the 1D repetition code">
+                <figcaption>
+                    Local decoder for the 1D repetition code.
+                    Defects propagate and annihilate under nearest-neighbor update rules.
+                </figcaption>
+            </figure>
 
-        <figure>
-          <img src="decoder_ca.gif"
-               alt="Cellular automaton decoder evolution">
-          <figcaption>
-            Cellular automaton decoder showing defect matching and convergence
-            to the code space.
-          </figcaption>
-        </figure>
-      </div>
+            <figure>
+                <img src="decoder_ca.gif" alt="Cellular automaton decoder evolution">
+                <figcaption>
+                    Cellular automaton decoder showing defect matching and convergence
+                    to the code space.
+                </figcaption>
+            </figure>
+        </div>
 
-      <p>
-        These decoders are discussed in more detail in
-        <em>High-performance local decoders for defect matching in 1D</em>
-        (Paletta et al., 2025).
-      </p>
+        <p>
+            These decoders are discussed in more detail in
+            <em>High-performance local decoders for defect matching in 1D</em>
+            (Paletta et al., 2025).
+        </p>
     </section>
-  </body>
+</body>
 </html>
