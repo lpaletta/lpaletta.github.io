@@ -1,81 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Louis Paletta</title>
+    <title>Animation | Louis Paletta</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
-    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">    
-    <!-- Include Font Awesome <link rel="stylesheet" href="new.css">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+
     <style>
-      img.orcid-logo {
-        vertical-align: middle; /* Align the middle of the image with the middle of the text */
-        height: 1em; /* Adjust the size of the ORCID icon relative to the font size */
-        width: auto;
-      }
       nav a.active {
-        font-weight: bold; /* Makes the text bold */
-        /* Additional styling if needed */
+        font-weight: bold;
+      }
+
+      .gif-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .gif-grid img {
+        max-width: 100%;
+        border-radius: 6px;
+      }
+
+      .gif-grid figure {
+        text-align: center;
+      }
+
+      @media (max-width: 700px) {
+        .gif-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
+
   <body>
-  
-      	<header>
-  		<h1>Louis Paletta</h1>
-      <p>Postdoctoral Researcher in Quantum Information, Technical University of Munich</p>
-        <nav>
-            <a href="index.html" class="active">About</a> &nbsp; &nbsp;
-            <a href="research.html">Research</a> &nbsp; &nbsp;
-            <a href="teaching.html">Teaching</a> &nbsp; &nbsp;
-            <a href="animation.html">Animation</a>
-        </nav>
+    <header>
+      <h1>Animation</h1>
+      <p>Local decoder dynamics</p>
+
+      <nav>
+        <a href="index.html">About</a> &nbsp; &nbsp;
+        <a href="research.html">Research</a> &nbsp; &nbsp;
+        <a href="teaching.html">Teaching</a> &nbsp; &nbsp;
+        <a href="animation.html" class="active">Animation</a>
+      </nav>
     </header>
 
     <section>
       <p>
-        My research interests revolve around quantum error correcting codes and quantum computing, and in particular: 
-        quantum supremacy, fault-tolerant logical gates, cellular automaton decoding.
+        Animations illustrating the dynamics of local and cellular automaton decoders
+        used in my work on quantum error correction.
       </p>
-          
-      <h3>Publications</h3>
-            <p>
-              See also my <a href="https://scholar.google.com/citations?user=bbQDe20AAAAJ&hl=fr">Google scholar</a> profile
-              and my ORCID record: <a href="https://orcid.org/0009-0009-3921-0404"><img alt="ORCID logo" class="orcid-logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" />0009-0009-3921-0404</a>.
-            </p>
 
-      <ul>
-        <li>
-          Paletta, L., Leverrier, A., Sarlette, A., Mirrahimi, M., Vuillot, C. - 
-          Robust sparse IQP sampling in constant depth. arXiv:2307.10729v4, (2024).
-          [<a href="https://doi.org/10.22331/q-2024-05-06-1337">Quantum</a>] &nbsp;
-          [<a href="https://arxiv.org/abs/2307.10729">arXiv</a>] &nbsp;
-        </li>
-        <li>
-          Paletta, L., Leverrier, A., Mirrahimi, M., Vuillot, C. - 
-          High-performance local decoders for defect matching in 1D. arXiv:2505.10162, (2025).
-          [<a href="https://arxiv.org/abs/2505.10162">arXiv</a>] &nbsp;
-        </li>
-      </ul>
+      <div class="gif-grid">
+        <figure>
+          <img src="decoder1.gif" alt="Local decoder animation">
+          <figcaption>
+            Local decoder for the 1D repetition code.
+          </figcaption>
+        </figure>
 
-      <h3>Talks</h3>
-      <ul>
-        <li>
-          Robust sparse IQP sampling in constant depth, QIP 2024 [<a href="https://www.youtube.com/watch?v=HykVhQHOnuU&t=0s">Video</a>]
-        </li>
-        <li>
-          High-performance local decoders for defect matching in 1D, Les Houches 2025 [<a href="https://videos.univ-grenoble-alpes.fr/luniversite/2025-fault-tolerant-quantum-computing-theory-and-current-state-of-play/video/33081-2025_04_24_17_36_b-hetenyi-r-rousseau-g-kim-m-serra-peralta-p-schnable-l-paletta/">Video</a>]
-        </li>
-      </ul>
-
-      <h3>PhD Thesis</h3>
-      <ul>
-        <li>
-          Local quantum memories and early fault-tolerant algorithms [<a href="https://inria.hal.science/tel-05488008">HAL</a>]
-        </li>
-      </ul>
-
-      <h3>Coding</h3>
-      <p>My Github profile: <a href="https://github.com/lpaletta">@lpaletta</a>.</p> 
+        <figure>
+          <img src="decoder2.gif" alt="Cellular automaton decoder animation">
+          <figcaption>
+            Cellular automaton decoder dynamics.
+          </figcaption>
+        </figure>
+      </div>
     </section>
+  </body>
+</html>
