@@ -102,6 +102,8 @@
         leading to their local pairing and annihilation.
     </p>
 
+    <h3>Representation</h3>
+
     <div class="gif-grid">
 
         <figure>
@@ -122,23 +124,15 @@
 
     </div>
 
-    <h3>Visualization rules</h3>
-
+    <p>A single particle is represented per site, according to following priority order</p>
+    
     <ul>
-    <li>
-        Rendering priority is defined as follows:<br>
-        defect &gt; 1-forward-signal &gt; 2-forward-signal<br>
-        1-stack &gt; 2-stack &gt; 1-anti-signal &gt; 2-anti-signal
-    </li>
-
-    <li>
-        If multiple signals of the same type occupy a single site, they are represented by a square.
-    </li>
-
-    <li>
-        The maximum value of local stacks is displayed in white.
-    </li>
+    <li>defects &gt; 1-forward-signals &gt; 2-forward-signals</li>
+    <li>1-stacks &gt; 2-stacks &gt; 1-anti-signals &gt; 2-anti-signals</li>
     </ul>
+    
+    <p>Multiple signals of the same type at a site are represented as a square.</p>
+    <p>The highest value of each local stack is shown in white.</p>
 
     <h3>Elementary Update Mechanisms</h3>
 
