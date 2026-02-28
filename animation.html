@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Louis Paletta</title>
+    <title>Louis Paletta – Animation</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-    <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
         img.orcid-logo {
-            vertical-align: middle; /* Align the middle of the image with the middle of the text */
-            height: 1em; /* Adjust the size of the ORCID icon relative to the font size */
+            vertical-align: middle;
+            height: 1em;
             width: auto;
         }
 
         nav a.active {
-            font-weight: bold; /* Makes the text bold */
+            font-weight: bold;
         }
 
         .gif-grid {
@@ -49,68 +48,127 @@
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>Louis Paletta</h1>
-        <p>Postdoctoral Researcher in Quantum Information, Technical University of Munich</p>
+<header>
+    <h1>Louis Paletta</h1>
+    <p>Postdoctoral Researcher in Quantum Information, Technical University of Munich</p>
 
-        <nav>
-            <a href="index.html">About</a> &nbsp; &nbsp;
-            <a href="research.html">Research</a> &nbsp; &nbsp;
-            <a href="teaching.html">Teaching</a> &nbsp; &nbsp;
-            <a href="animation.html" class="active">Animation</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="index.html">About</a> &nbsp; &nbsp;
+        <a href="research.html">Research</a> &nbsp; &nbsp;
+        <a href="teaching.html">Teaching</a> &nbsp; &nbsp;
+        <a href="animation.html" class="active">Animation</a>
+    </nav>
+</header>
 
-    <section>
-        <p>
-            This page contains illustrative animations of 2D signal-rule decoders introduced in Local decoding of the toric code under high noise, L. Paletta, 2026.
-        </p>
-        <p>
-            Each lattice site is equipped with a local memory that stores the value of the local stabilizer measurement outcome (-1 outcome is called a defect), along with 12 binary variables (1- and 2-forward signals, and 1- and 2-anti-signals, each subdivided by cardinal direction) 
-            and 6 integer variables (1- and 2-stacks, also subdivided by cardinal direction).
-        </p>
+<section>
 
-        <!-- Central figure -->
-        <figure style="text-align: center; margin: 2rem 0;">
-            <img src="localstatespace.png" alt="Schematic of 2D signal-rule decoder" style="max-width: 85%; border-radius: 6px;">
+    <p>
+        This page presents illustrative animations of the 2D signal-rule decoders introduced in 
+        <em>Local decoding of the toric code under high noise</em>, L. Paletta (2026).
+    </p>
+
+    <p>
+        Each lattice site stores the local stabilizer measurement outcome 
+        (a −1 outcome is referred to as a <em>defect</em>) together with:
+    </p>
+
+    <ul>
+        <li>12 binary variables (1- and 2-forward-signals, 1- and 2-anti-signals, each subdivided by cardinal direction),</li>
+        <li>6 integer-valued stacks (1- and 2-stacks, subdivided by cardinal direction).</li>
+    </ul>
+
+    <figure style="text-align: center; margin: 2rem 0;">
+        <img src="localstatespace.png" alt="Schematic of 2D signal-rule decoder" style="max-width: 85%; border-radius: 6px;">
+        <figcaption>
+            Local state space
+        </figcaption>
+    </figure>
+
+    <p>
+        The rule dynamically mediates an effective attractive interaction between defects,
+        leading to their local pairing and annihilation.
+    </p>
+
+    <h2>Elementary Update Mechanisms</h2>
+
+    <ol>
+        <li>
+            <em>Matching</em> of neighboring defects by applying a local Pauli correction in between (i).
+        </li>
+
+        <li>
+            <em>1-forward dynamics</em>
+            <ol type="a">
+                <li>
+                    <em>Creation</em> of 1-forward-signals from defect sites; the associated local 1-stacks are incremented by 1 (ii).
+                </li>
+                <li>
+                    <em>Propagation</em> of 1-forward-signals by one lattice step (viii).
+                </li>
+            </ol>
+        </li>
+
+        <li>
+            <em>2-forward dynamics</em>
+            <ol type="a">
+                <li>
+                    <em>Creation</em> of 2-forward-signals from 1-forward-signals and defect sites; the associated local stacks are incremented by 1 (iii).
+                </li>
+                <li>
+                    <em>Propagation</em> of 2-forward-signals by one lattice step (viii).
+                </li>
+            </ol>
+        </li>
+
+        <li>
+            <em>Attraction</em> of defects encountering 1- or 2-forward-signals by applying a local Pauli correction (iv).
+        </li>
+
+        <li>
+            <em>Anti-signal dynamics</em>
+            <ol type="a">
+                <li>
+                    <em>Creation</em> of 1-anti-signals (resp. 2-anti-signals) triggered by decrementing the 
+                    1-stacks (resp. 2-stacks) when no defect is present (v) (resp. (vi)).
+                </li>
+                <li>
+                    (Repeated three times) <em>Propagation</em> by one lattice step (viii) and 
+                    <em>recombination</em> of anti-signals with forward-signals of the same type and direction (vii).
+                </li>
+            </ol>
+        </li>
+    </ol>
+
+    <div class="gif-grid">
+        <figure>
+            <img src="offline.gif" alt="Local decoder of the toric code in the offline regime">
             <figcaption>
-                Local state space
+                Offline regime
             </figcaption>
         </figure>
-    
-        <!-- Explanatory text before GIFs -->
-        <p>
-            The rule aims to match defects by pair, by mediating an attractive interaction between them.
-        </p>
 
-        <div class="gif-grid">
-            <figure>
-                <img src="offline.gif" alt="Local decoder of the toric code in the offline regime">
-                <figcaption>
-                    Offline regime
-                </figcaption>
-            </figure>
+        <figure>
+            <img src="online.gif" alt="Local decoder of the toric code in the online regime">
+            <figcaption>
+                Online regime (without measurement error)
+            </figcaption>
+        </figure>
+    </div>
 
-            <figure>
-                <img src="online.gif" alt="Local decoder of the toric code in the online regime">
-                <figcaption>
-                    Online regime (without measurement error)
-                </figcaption>
-            </figure>
-        </div>
+    <p><strong>Printing priority:</strong></p>
+    <ul>
+        <li>defect &gt; 1-forward-signal &gt; 2-forward-signal</li>
+        <li>1-stack &gt; 2-stack &gt; 1-anti-signal &gt; 2-anti-signal</li>
+    </ul>
 
-        <p>Signals are printed with the following priority order:</p>
-        <ul>
-            <li>defect &gt; 1-forward-signal &gt; 2-forward-signal</li>
-            <li>1-stack &gt; 2-stack &gt; 1-anti-signal &gt; 2-anti-signal</li>
-        </ul>
-        <p>Other printing rules include:
-        <ul>
-            <li>Several signals of the same type on the same site are indicated by a square</li>
-            <li>The maximum of the local stack is printed in white</li>
-        </ul>
-        </p>
-    </section>
+    <p><strong>Additional visualization rules:</strong></p>
+    <ul>
+        <li>Multiple signals of the same type on the same site are represented by a square.</li>
+        <li>The maximum value of the local stack is displayed in white.</li>
+    </ul>
+
+</section>
 </body>
 </html>
