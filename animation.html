@@ -33,7 +33,7 @@
         .side, .mech { padding-top: 0.5rem; }
         .layout { font-size: 0.85rem; }
         .layout h3 { font-size: 1rem; margin-bottom: 0.4rem; }
-        .center { padding-top: 1.5rem; }
+        .center { padding-top: 1.5rem; display: flex; flex-direction: column; justify-content: center; }
         .side h3, .mech h3 { margin-top: 0; }
         .mech ol, .mech ul { padding-left: 1.2rem; }
         #legend-a, #legend-b { list-style: none; padding: 0; margin: 0.5rem 0; }
@@ -42,7 +42,7 @@
         .side .sim-controls { display: grid; gap: 0.35rem; margin: 0 0 0.8rem; }
         .side .sim-controls label { margin-bottom: 0.1rem; }
         .side input[type=number] { width: 5.5rem; }
-        .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; justify-content: center; margin: 0 0 1rem; }
+        .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0 0 1rem; }
         .transport button { min-width: 2.8rem; margin: 0; }
         .display label, .regime label { display: inline-block; margin-right: 1rem; }
         .panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; margin: 0.5rem 0; }
@@ -50,7 +50,8 @@
         .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; background: #fff; }
         .panels figcaption { text-align: center; margin-top: 0.4rem; font-size: 1rem; font-weight: bold; }
         .panels figcaption + figcaption { margin-top: 0.1rem; font-size: 0.85rem; font-weight: normal; }
-        #frame-label { text-align: center; margin: 0.5rem 0; font-size: 1rem; font-weight: bold; }
+        #frame-label { margin: 0 0 0.8rem; font-size: 0.85rem; }
+        #frame-label b { font-size: 1rem; }
         #step-name { display: none; }
         @media (max-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr); width: auto; position: static; transform: none; } .panels { grid-template-columns: minmax(0, 1fr); } }
     </style>
@@ -79,6 +80,18 @@
 
     <div class="layout">
     <aside class="side">
+    <div id="frame-label"></div>
+    <p id="step-name"></p>
+
+    <div class="transport">
+        <button id="init">Initialize</button>
+        <button id="reset">Reset</button>
+        &nbsp;
+        <button id="back" title="step back">&#124;&#9664;</button>
+        <button id="play" title="play / pause">&#9654;</button>
+        <button id="fwd" title="step forward">&#9654;|</button>
+    </div>
+
     <h3>Options</h3>
     <div class="sim-controls">
         <div class="regime">
@@ -103,18 +116,6 @@
     </aside>
 
     <div class="center">
-    <div id="frame-label"></div>
-    <p id="step-name"></p>
-
-    <div class="transport">
-        <button id="init">Initialize</button>
-        <button id="reset">Reset</button>
-        &nbsp;
-        <button id="back" title="step back">&#124;&#9664;</button>
-        <button id="play" title="play / pause">&#9654;</button>
-        <button id="fwd" title="step forward">&#9654;|</button>
-    </div>
-
     <div class="panels">
         <figure>
             <canvas id="cv-left" aria-label="Defects and forward signals"></canvas>
@@ -166,8 +167,8 @@
 
 </section>
 
-<script src="decoder.js?v=12"></script>
-<script src="animation.js?v=12"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="M5UCm4O9skuJN/FPFcAYpg==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script src="decoder.js?v=14"></script>
+<script src="animation.js?v=14"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="cgr8SkTr9RuvX1C1E3ATcw==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
