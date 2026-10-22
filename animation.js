@@ -68,7 +68,7 @@
     for (let n = 0; n < N; n++) {
       let k;
       if (side === 0) {
-        if (show('defects') && dec.D[n]) put(n, 'o', COL.defect, 0, 0.32 * c);
+        if (show('defects') && dec.D[n]) put(n, 'o', COL.defect, 0, 0.30 * c);
         else if (show('fwd') && (k = sig(dec.F1, n, N)) !== null) put(n, k, COL.f1);
         else if (show('fwd') && (k = sig(dec.F2, n, N)) !== null) put(n, k, COL.f2);
       } else {
