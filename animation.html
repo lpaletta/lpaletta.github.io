@@ -27,12 +27,13 @@
             font-weight: bold;
         }
 
-        .layout { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 1.5rem; align-items: start; margin: 1.5rem auto;
+        .layout { display: grid; grid-template-columns: 23fr 54fr 23fr; gap: 1.5rem; align-items: start; margin: 1.5rem auto;
                   width: 95vw; position: relative; left: 50%; transform: translateX(-50%);
                   background: #f7f7f7; padding: 1rem 1.5rem; border-radius: 8px; box-sizing: border-box; }
         .side, .mech { padding-top: 0.5rem; }
         .side h3, .mech h3 { margin-top: 0; }
         .mech ol, .mech ul { padding-left: 1.2rem; }
+        #legend { list-style: none; padding: 0; margin: 0.5rem 0; }
         .side .sim-controls { display: grid; gap: 0.35rem; margin: 0 0 0.8rem; }
         .side .sim-controls label { margin-bottom: 0.1rem; }
         .side input[type=number] { width: 5.5rem; }
@@ -41,7 +42,7 @@
         .display label, .regime label { display: inline-block; margin-right: 1rem; }
         .panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; margin: 0.5rem 0; }
         .panels figure { margin: 0; min-width: 0; }
-        .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; }
+        .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; background: #fff; }
         .panels figcaption { text-align: center; margin-top: 0.4rem; }
         #frame-label { text-align: center; margin: 0.5rem 0; font-size: 1.25em; }
         #step-name { display: none; }
@@ -65,20 +66,25 @@
 
 <section>
 
+    <p>
+        This page presents illustrative animations of the 2D signal-rule decoders introduced in
+        <em>Local decoder for the toric code via signal exchange</em>, L. Paletta (2026).
+    </p>
+
     <div class="layout">
     <aside class="side">
     <h3>Options</h3>
     <div class="sim-controls">
         <div class="regime">
             <label>Regime</label>
-            <label><input type="radio" name="regime" value="offline" checked> offline</label>
-            <label><input type="radio" name="regime" value="online"> online</label>
+            <label><input type="radio" name="regime" value="offline"> offline</label>
+            <label><input type="radio" name="regime" value="online" checked> online</label>
         </div>
         <div>
-            <label for="size">d = <input type="number" id="size" min="5" max="31" step="1" value="13"></label>
+            <label for="size">d = <input type="number" id="size" min="5" max="31" step="1" value="15"></label>
         </div>
         <div>
-            <label for="perr">&epsilon;<sub>d</sub> = <input type="number" id="perr" min="0" max="1" step="0.01" value="0.1"></label>
+            <label for="perr">&epsilon;<sub>d</sub> = <input type="number" id="perr" min="0" max="1" step="0.01" value="0.01"></label>
         </div>
         <div id="merr-row" hidden>
             <label for="merr">&epsilon;<sub>m</sub> = <input type="number" id="merr" min="0" max="1" step="0.01" value="0"></label>
@@ -116,15 +122,21 @@
     </div>
 
     <aside class="mech">
-    <h3>Layout</h3>
-    <figure style="text-align: center; margin: 0 0 1rem;">
-        <img src="localstatespace.png"
-             alt="Schematic of 2D signal-rule decoder"
-             style="max-width: 100%; border-radius: 6px;">
-        <figcaption>
-            Local state space
-        </figcaption>
-    </figure>
+    <h3>Legend</h3>
+    <ul id="legend"></ul>
+
+    <ol>
+        <li>
+            A single particle is represented per site, according to the following priority order:
+            <ul style="list-style-type: disc;">
+                <li>defects &gt; 1-forward-signals &gt; 2-forward-signals</li>
+                <li>1-stacks &gt; 2-stacks &gt; 1-anti-signals &gt; 2-anti-signals</li>
+            </ul>
+        </li>
+        <li>Multiple signals of the same type at a site are represented as a square.</li>
+        <li>The highest value of each local stack is shown in white.</li>
+    </ol>
+
     <h3>Update steps</h3>
 
     <ol>
@@ -152,15 +164,10 @@
     </aside>
     </div>
 
-    <p>
-        This page presents illustrative animations of the 2D signal-rule decoders introduced in
-        <em>Local decoder for the toric code via signal exchange</em>, L. Paletta (2026).
-    </p>
-
 </section>
 
 <script src="decoder.js?v=4"></script>
 <script src="animation.js?v=4"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="71BdfS7U85DVfXPYzHb63Q==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="XM0e3m6LL0PE34ytaYjfow==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
