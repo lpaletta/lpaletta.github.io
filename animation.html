@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
+        :root, body { color-scheme: light; }
+        @media (prefers-color-scheme: dark) {
+            :root { --nc-tx-1: #000000; --nc-tx-2: #1A1A1A; --nc-bg-1: #FFFFFF; --nc-bg-2: #FFFFFF; --nc-bg-3: #E5E7EB;
+                    --nc-lk-1: #0070F3; --nc-lk-2: #0366D6; --nc-lk-tx: #FFFFFF; --nc-ac-1: #79FFE1; --nc-ac-tx: #0C4047; }
+        }
+        html, body { background: #fff; }
         img.orcid-logo {
             vertical-align: middle;
             height: 1em;
@@ -33,8 +39,6 @@
         .panels figcaption { text-align: center; font-size: 0.9em; margin-top: 0.4rem; }
         #frame-label { text-align: center; font-size: 1.5em; margin: 1rem 0 0; }
         #step-name { text-align: center; margin: 0 0 0.5rem; font-size: 0.95em; }
-        #state { display: grid; grid-template-columns: max-content 1fr; gap: 0.15rem 1.2rem; margin: 0.5rem 0; }
-        #state dt { font-weight: bold; } #state dd { margin: 0; }
         #legend { list-style: none; padding: 0; columns: 2; margin: 0.5rem 0; }
         @media (max-width: 700px) { .panels { grid-template-columns: 1fr; } #legend { columns: 1; } }
     </style>
@@ -98,41 +102,21 @@
             <label><input type="radio" name="regime" value="online"> online</label>
         </div>
         <div>
-            <label for="scenario">Initial errors</label>
-            <select id="scenario">
-                <option value="random">random</option>
-                <option value="manual">manual (click on edges)</option>
-                <option value="pair">pair of defects</option>
-                <option value="single">single measurement error</option>
-                <option value="persistent">persistent measurement error</option>
-            </select>
-        </div>
-        <div>
             <label for="size">System size: <span id="size-val"></span></label>
             <input type="range" id="size" min="5" max="31" step="1" value="13">
         </div>
         <div>
-            <label for="perr" id="perr-label">error probability</label>
+            <label for="perr" id="perr-label">data error rate</label>
             <input type="range" id="perr" min="0" max="100" step="1" value="10"> <span id="perr-val"></span>
         </div>
         <div id="merr-row" hidden>
-            <label for="merr">measurement error probability</label>
+            <label for="merr">meas error rate</label>
             <input type="range" id="merr" min="0" max="100" step="1" value="0"> <span id="merr-val"></span>
         </div>
         <div>
             <label for="speed">Animation speed</label>
             <input type="range" id="speed" min="1" max="40" step="1" value="5"> <span id="speed-val"></span>
         </div>
-    </div>
-
-    <div class="display">
-        <label>Display:</label>
-        <label><input type="checkbox" id="show-defects" checked> defects</label>
-        <label><input type="checkbox" id="show-errors" checked> errors</label>
-        <label><input type="checkbox" id="show-fwd" checked> forward signals</label>
-        <label><input type="checkbox" id="show-stack" checked> stacks</label>
-        <label><input type="checkbox" id="show-anti" checked> anti-signals</label>
-        <label><input type="checkbox" id="show-grid" checked> grid</label>
     </div>
 
     <div class="transport">
@@ -145,7 +129,6 @@
         <button id="fwd" title="step forward">&#9654;|</button>
         <button id="fwd-iter" title="next iteration">&#9654;&#9654;</button>
     </div>
-    <p id="hint" hidden><em>Click on the edges between sites (left panel) to flip data qubits, then press play.</em></p>
 
     <div id="frame-label"></div>
     <p id="step-name"></p>
@@ -160,9 +143,6 @@
             <figcaption>Stacks &amp; anti-signals</figcaption>
         </figure>
     </div>
-
-    <h4>State</h4>
-    <dl id="state"></dl>
 
     <h4>Legend</h4>
     <ul id="legend"></ul>
