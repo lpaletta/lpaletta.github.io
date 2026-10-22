@@ -27,23 +27,23 @@
             font-weight: bold;
         }
 
-        .layout { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 1.5rem; align-items: start; margin: 1.5rem auto;
-                  width: 95vw; position: relative; left: 50%; transform: translateX(-50%); }
-        .mech h3 { font-size: 1.1rem; margin-top: 0; }
-        .mech { font-size: 0.92rem; }
-        .side { font-size: 1.15rem; }
+        .layout { display: grid; grid-template-columns: 1fr 4fr 1fr; gap: 1.5rem; align-items: start; margin: 1.5rem auto;
+                  width: 95vw; position: relative; left: 50%; transform: translateX(-50%);
+                  background: #f2f2f2; padding: 1rem 1.5rem; border-radius: 8px; box-sizing: border-box; }
+        .mech h3 { margin-top: 0; }
+        .mech ol, .mech ul { padding-left: 1.2rem; }
+        .side { }
         .side .sim-controls { display: grid; gap: 1rem; margin: 0 0 1rem; }
         .side .sim-controls label { margin-bottom: 0.2rem; }
-        .side input[type=number] { width: 5.5rem; font-size: 1.05rem; }
-        .side button { font-size: 1.05rem; }
+        .side input[type=number] { width: 5.5rem; }
         .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0 0 1rem; }
         .transport button { min-width: 2.8rem; margin: 0; }
         .display label, .regime label { display: inline-block; margin-right: 1rem; }
         .panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; margin: 0.5rem 0; }
         .panels figure { margin: 0; min-width: 0; }
         .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; }
-        .panels figcaption { text-align: center; font-size: 0.9em; margin-top: 0.4rem; }
-        #frame-label { text-align: center; font-size: 1.5em; margin: 1rem 0 0.5rem; }
+        .panels figcaption { text-align: center; margin-top: 0.4rem; }
+        #frame-label { text-align: center; margin: 0.5rem 0; }
         #step-name { display: none; }
         @media (max-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr); width: auto; position: static; transform: none; } .panels { grid-template-columns: minmax(0, 1fr); } }
     </style>
@@ -123,7 +123,7 @@
     </div>
 
     <div class="transport">
-        <button id="init">Reinitialize</button>
+        <button id="init">Initialize</button>
         <button id="reset">Reset</button>
         &nbsp;
         <button id="back" title="step back">&#124;&#9664;</button>
@@ -153,55 +153,14 @@
     <h3>Elementary Update Mechanisms</h3>
 
     <ol>
-        <li>
-            <em>Matching</em> of neighboring defects by applying a local Pauli correction in between.
-        </li>
-
-        <li>
-            <em>1-forward dynamics</em>
-            <ol type="a">
-                <li>
-                    <em>Creation</em> of 1-forward-signals from defect sites;
-                    the associated local 1-stacks are incremented by 1.
-                </li>
-                <li>
-                    <em>Propagation</em> of 1-forward-signals by one lattice step.
-                </li>
-            </ol>
-        </li>
-
-        <li>
-            <em>2-forward dynamics</em>
-            <ol type="a">
-                <li>
-                    <em>Creation</em> of 2-forward-signals from 1-forward-signals and defect sites;
-                    the associated local stacks are incremented by 1.
-                </li>
-                <li>
-                    <em>Propagation</em> of 2-forward-signals by one lattice step.
-                </li>
-            </ol>
-        </li>
-
-        <li>
-            <em>Attraction</em> of defects encountering 1- or 2-forward-signals by applying a local Pauli correction.
-        </li>
-
-        <li>
-            <em>Anti-signal dynamics</em>
-            <ol type="a">
-                <li>
-                    <em>Creation</em> of 1-anti-signals (resp. 2-anti-signals) triggered
-                    by decrementing the 1-stacks (resp. 2-stacks) when no defect is present.
-                </li>
-                <li>
-                    (Repeated three times) <em>Propagation</em> by one lattice step
-                    and <em>recombination</em> of anti-signals with forward-signals
-                    of the same type and direction.
-                </li>
-            </ol>
-        </li>
-
+        <li><em>Matching</em> of neighboring defects</li>
+        <li><em>Creation</em> of 1-forward-signals</li>
+        <li><em>Propagation</em> of 1-forward-signals</li>
+        <li><em>Creation</em> of 2-forward-signals</li>
+        <li><em>Propagation</em> of 2-forward-signals</li>
+        <li><em>Attraction</em> of defects</li>
+        <li><em>Creation</em> of anti-signals</li>
+        <li><em>Propagation &amp; recombination</em> of anti-signals</li>
     </ol>
     </aside>
     </div>
@@ -210,6 +169,6 @@
 
 <script src="decoder.js?v=3"></script>
 <script src="animation.js?v=3"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="3g3OTCf4Qqtt9WT7NVBExA==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="eRn1hR6a36nHraKlCsbVvg==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
