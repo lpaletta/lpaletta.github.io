@@ -63,12 +63,12 @@
     const put = (n, kind, color, num, rr) => {
       const i = Math.floor(n / L), j = n % L, x = X(j), y = Y(i);
       marker(ctx, kind, x, y, rr || (kind === 's' ? 0.34 * c : r), color);
-      if (num) { ctx.fillStyle = '#fff'; ctx.font = `bold ${0.55 * c}px sans-serif`; ctx.fillText(num, x, y + 0.03 * c); }
+      if (num) { ctx.fillStyle = '#fff'; ctx.font = `bold ${0.55 * c}px sans-serif`; ctx.fillText(num, x, y - 0.04 * c); }
     };
     for (let n = 0; n < N; n++) {
       let k;
       if (side === 0) {
-        if (show('defects') && dec.D[n]) put(n, 'o', COL.defect);
+        if (show('defects') && dec.D[n]) put(n, 'o', COL.defect, 0, 0.32 * c);
         else if (show('fwd') && (k = sig(dec.F1, n, N)) !== null) put(n, k, COL.f1);
         else if (show('fwd') && (k = sig(dec.F2, n, N)) !== null) put(n, k, COL.f2);
       } else {
@@ -139,7 +139,7 @@
       const li = document.createElement('li'), cv = document.createElement('canvas'); cv.width = cv.height = 44; cv.style.cssText = 'width:22px;height:22px;vertical-align:middle;margin-right:6px';
       const ctx = cv.getContext('2d'); ctx.scale(2, 2);
       if (kind === 'e') { ctx.strokeStyle = COL.err; ctx.lineWidth = 3.5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(3, 11); ctx.lineTo(19, 11); ctx.stroke(); }
-      else { marker(ctx, kind, 11, 11, 8, color); if (num) { ctx.fillStyle = '#fff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(num, 11, 11.5); } }
+      else { marker(ctx, kind, 11, 11, 8, color); if (num) { ctx.fillStyle = '#fff'; ctx.font = 'bold 11.5px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(num, 11, 10.5); } }
       li.append(cv, label); $('legend').append(li);
     }
   }
