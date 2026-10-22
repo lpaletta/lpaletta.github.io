@@ -5,10 +5,10 @@
   const COL = { defect: '#0071bc', f1: '#0071bc', f2: '#b4c8e6', s1: '#fbb03b', s2: '#f7ddbb', err: '#d7263d' };
   const ANGLE = [0, -Math.PI / 2, Math.PI, Math.PI / 2];           // E, N(up), W, S(down)
   const STEPS = ['syndrome measurement', 'matching of neighboring defects', 'creation & propagation of 1-forward-signals',
-    'creation & propagation of 2-forward-signals', 'attraction of defects', 'anti-signals: creation',
-    'anti-signals: propagation & recombination (2/4)',
-    'anti-signals: propagation & recombination (3/4)',
-    'anti-signals: propagation & recombination (4/4)'];
+    'creation & propagation of 2-forward-signals', 'attraction of defects', 'anti-signal (1/4) : creation',
+    'anti-signal (2/4) : propagation & recombination',
+    'anti-signal (3/4) : propagation & recombination',
+    'anti-signal (4/4) : propagation & recombination'];
   const MAXF = 1500;                                                      // history length cap
 
   let dec, frames, idx, L = 13, timer = null;
