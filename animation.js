@@ -89,7 +89,7 @@
 
   function render() {
     const j = Math.min(dec.ph, 5);
-    $('frame-label').textContent = `iter. ${dec.it + 1}.${j} : ${STEPS[dec.ph]}`;
+    $('frame-label').innerHTML = `Iteration ${dec.it + 1}.${j} <span class="step">&ndash; ${STEPS[dec.ph]}</span>`;
     draw($('cv-left'), 0); draw($('cv-right'), 1);
     $('back').disabled = idx === 0;
     $('play').textContent = timer ? '⏸' : '▶';
