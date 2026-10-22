@@ -1,6 +1,7 @@
 /* Interactive visualization of the 2D signal-rule decoder. Engine: decoder.js */
 (function () {
   const $ = id => document.getElementById(id);
+  window.addEventListener('error', e => { const s = $('step-name'); if (s) s.textContent = 'Error: ' + e.message + ' (' + (e.filename || '').split('/').pop() + ':' + e.lineno + ')'; });
   const COL = { defect: '#0071bc', f1: '#0071bc', f2: '#b4c8e6', s1: '#fbb03b', s2: '#f7ddbb', err: '#d7263d' };
   const ANGLE = [0, -Math.PI / 2, Math.PI, Math.PI / 2];           // E, N(up), W, S(down)
   const STEPS = ['syndrome measurement', 'matching', '1-forward signals: creation & propagation',
@@ -115,13 +116,13 @@
 
   function init() {
     stop();
-    const sc = 'random', P = null, online = regime() === 'online';
+    const P = null, online = regime() === 'online';
     if (P) { $('size').value = P.L; $('size-val').textContent = P.L; }
     L = +$('size').value;
     const p = +$('perr').value / 1000, q = online ? +$('merr').value / 1000 : 0;
-    dec = new Decoder(L, { online, p, q, inj: (P && P.inj) || {}, quietFirst: false });
+    dec = new Decoder(L, { online, p, q, inj: (P && P.inj) || {}, quietFirst: online });   // online: start from the all-zero configuration, noise enters from round 2
     if (P && P.h) { P.h.forEach(([i, j]) => dec.h[i * L + j] = 1); P.v.forEach(([i, j]) => dec.v[i * L + j] = 1); }
-    if (sc === 'random' && !online) {
+    if (!online) {                                  // offline: a single round of random data errors
       let k = 0;
       for (let n = 0; n < dec.N; n++) { if (Math.random() < p) { dec.h[n] = 1; k++; } if (Math.random() < p) { dec.v[n] = 1; k++; } }
       if (!k) dec.h[Math.floor(Math.random() * dec.N)] = 1;
