@@ -1,7 +1,7 @@
 /* Interactive visualization of the 2D signal-rule decoder. Engine: decoder.js */
 (function () {
   const $ = id => document.getElementById(id);
-  window.addEventListener('error', e => { const s = $('step-name'); if (s) s.textContent = 'Error: ' + e.message + ' (' + (e.filename || '').split('/').pop() + ':' + e.lineno + ')'; });
+  window.addEventListener('error', e => { const s = $('frame-label'); if (s) s.textContent = 'Error: ' + e.message + ' (' + (e.filename || '').split('/').pop() + ':' + e.lineno + ')'; });
   const COL = { defect: '#0071bc', f1: '#0071bc', f2: '#b4c8e6', s1: '#fbb03b', s2: '#f7ddbb', err: '#d7263d' };
   const ANGLE = [0, -Math.PI / 2, Math.PI, Math.PI / 2];           // E, N(up), W, S(down)
   const STEPS = ['syndrome measurement', 'matching of neighboring defects', 'creation & propagation of 1-forward-signals',
@@ -89,7 +89,7 @@
 
   function render() {
     const j = Math.min(dec.ph, 5);
-    $('frame-label').innerHTML = `Iteration ${dec.it + 1}.${j} <span class="step">&ndash; ${STEPS[dec.ph]}</span>`;
+    $('frame-label').textContent = `Iteration ${dec.it + 1}.${j}`;
     draw($('cv-left'), 0); draw($('cv-right'), 1);
     $('back').disabled = idx === 0;
     $('play').textContent = timer ? '⏸' : '▶';
