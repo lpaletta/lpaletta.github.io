@@ -42,7 +42,7 @@
         .side .sim-controls { display: grid; gap: 0.35rem; margin: 0 0 0.8rem; }
         .side .sim-controls label { margin-bottom: 0.1rem; }
         .side input[type=number] { width: 5.5rem; }
-        .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0 0 1rem; }
+        .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; justify-content: center; margin: 0 0 1rem; }
         .transport button { min-width: 2.8rem; margin: 0; }
         .display label, .regime label { display: inline-block; margin-right: 1rem; }
         .panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; margin: 0.5rem 0; }
@@ -50,7 +50,7 @@
         .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; background: #fff; }
         .panels figcaption { text-align: center; margin-top: 0.4rem; }
         .panels figcaption + figcaption { margin-top: 0.1rem; font-size: 1rem; }
-        #frame-label { text-align: center; margin: 0.5rem 0; font-size: 1.25em; }
+        #frame-label { text-align: center; margin: 0.5rem 0; font-size: 1rem; font-weight: bold; }
         #step-name { display: none; }
         @media (max-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr); width: auto; position: static; transform: none; } .panels { grid-template-columns: minmax(0, 1fr); } }
     </style>
@@ -100,6 +100,12 @@
         </div>
     </div>
 
+    </aside>
+
+    <div class="center">
+    <div id="frame-label"></div>
+    <p id="step-name"></p>
+
     <div class="transport">
         <button id="init">Initialize</button>
         <button id="reset">Reset</button>
@@ -108,12 +114,6 @@
         <button id="play" title="play / pause">&#9654;</button>
         <button id="fwd" title="step forward">&#9654;|</button>
     </div>
-
-    </aside>
-
-    <div class="center">
-    <div id="frame-label"></div>
-    <p id="step-name"></p>
 
     <div class="panels">
         <figure>
@@ -166,8 +166,8 @@
 
 </section>
 
-<script src="decoder.js?v=9"></script>
-<script src="animation.js?v=9"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="3p9Iff4rPc3qO5KPzE5qyA==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script src="decoder.js?v=10"></script>
+<script src="animation.js?v=10"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="HgyOlf5B30/2EWwVRxBv5A==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
