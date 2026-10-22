@@ -59,15 +59,15 @@
       }
     }
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `bold ${0.42 * c}px sans-serif`;
-    const put = (n, kind, color, num) => {
+    const put = (n, kind, color, num, rr) => {
       const i = Math.floor(n / L), j = n % L, x = X(j), y = Y(i);
-      marker(ctx, kind, x, y, kind === 's' ? 0.34 * c : r, color);
-      if (num) { ctx.fillStyle = '#fff'; ctx.fillText(num, x, y + 0.03 * c); }
+      marker(ctx, kind, x, y, rr || (kind === 's' ? 0.34 * c : r), color);
+      if (num) { ctx.fillStyle = '#fff'; ctx.font = `bold ${0.55 * c}px sans-serif`; ctx.fillText(num, x, y + 0.03 * c); }
     };
     for (let n = 0; n < N; n++) {
       let k;
       if (side === 0) {
-        if (show('defects') && dec.D[n]) put(n, 'o', COL.defect);
+        if (show('defects') && dec.D[n]) put(n, 'o', COL.defect, 0, 0.26 * c);
         else if (show('fwd') && (k = sig(dec.F1, n, N)) !== null) put(n, k, COL.f1);
         else if (show('fwd') && (k = sig(dec.F2, n, N)) !== null) put(n, k, COL.f2);
       } else {
@@ -91,8 +91,7 @@
     $('frame-label').textContent = `iter. ${dec.it + 1}.${j}`;
     $('step-name').textContent = `step ${dec.ph}: ${STEPS[dec.ph]}`;
     draw($('cv-left'), 0); draw($('cv-right'), 1);
-    $('back').disabled = $('back-iter').disabled = idx === 0;
-    $('fwd').disabled = $('fwd-iter').disabled = blocked();
+    $('back').disabled = idx === 0;
     $('play').textContent = timer ? '⏸' : '▶';
   }
   function go(i) { idx = i; dec.restore(frames[idx]); }
@@ -119,7 +118,7 @@
     const P = null, online = regime() === 'online';
     if (P) { $('size').value = P.L; $('size-val').textContent = P.L; }
     L = +$('size').value;
-    const p = +$('perr').value / 1000, q = online ? +$('merr').value / 1000 : 0;
+    const p = Math.min(1, Math.max(0, +$('perr').value || 0)), q = online ? Math.min(1, Math.max(0, +$('merr').value || 0)) : 0;
     dec = new Decoder(L, { online, p, q, inj: (P && P.inj) || {}, quietFirst: online });   // online: start from the all-zero configuration, noise enters from round 2
     if (P && P.h) { P.h.forEach(([i, j]) => dec.h[i * L + j] = 1); P.v.forEach(([i, j]) => dec.v[i * L + j] = 1); }
     if (!online) {                                  // offline: a single round of random data errors
@@ -131,38 +130,17 @@
   }
   function reset() { stop(); frames.length = 1; go(0); render(); }
 
-  // ---------- legend ----------
-  function legend() {
-    const items = [['defect', 'o', COL.defect], ['1-forward signal', 0, COL.f1], ['2-forward signal', 0, COL.f2], ['several signals', 's', COL.f1],
-      ['1-stack (top value)', 'o', COL.s1, '2'], ['2-stack (top value)', 'o', COL.s2, '1'], ['1-anti-signal', 0, COL.s1], ['2-anti-signal', 0, COL.s2], ['data error', 'e']];
-    $('legend').innerHTML = '';
-    for (const [label, kind, color, num] of items) {
-      const li = document.createElement('li'), cv = document.createElement('canvas'); cv.width = cv.height = 44; cv.style.cssText = 'width:22px;height:22px;vertical-align:middle;margin-right:6px';
-      const ctx = cv.getContext('2d'); ctx.scale(2, 2);
-      if (kind === 'e') { ctx.strokeStyle = COL.err; ctx.lineWidth = 3.5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(3, 11); ctx.lineTo(19, 11); ctx.stroke(); }
-      else { marker(ctx, kind, 11, 11, 8, color); if (num) { ctx.fillStyle = '#fff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(num, 11, 11.5); } }
-      li.append(cv, label); $('legend').append(li);
-    }
-  }
-
   // ---------- wiring ----------
   function syncUI() {
     const online = regime() === 'online';
     $('merr-row').hidden = !online;
-    $('perr-label').textContent = online ? 'data error rate (per round)' : 'data error rate';
   }
   window.addEventListener('DOMContentLoaded', () => {
-    legend();
-    $('init').onclick = () => { syncUI(); init(); };
     $('reset').onclick = reset;
     $('back').onclick = () => { stop(); stepBack(); render(); };
-    $('back-iter').onclick = () => { stop(); iterBack(); render(); };
     $('fwd').onclick = () => { stop(); stepFwd(); render(); };
-    $('fwd-iter').onclick = () => { stop(); iterFwd(); render(); };
     $('play').onclick = togglePlay;
-    for (const [id, out, f] of [['speed', 'speed-val', v => v + ' steps/s'], ['size', 'size-val', v => v], ['perr', 'perr-val', v => (v / 10) + '%'], ['merr', 'merr-val', v => (v / 10) + '%']])
-      $(id).oninput = () => { $(out).textContent = f($(id).value); };
-    document.querySelectorAll('input[name=regime], #size').forEach(el => el.onchange = () => { syncUI(); init(); });
+    document.querySelectorAll('input[name=regime], #size, #perr, #merr').forEach(el => el.onchange = () => { syncUI(); init(); });
     window.addEventListener('resize', () => dec && render());
     document.addEventListener('keydown', e => {
       if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName) && e.target.type !== 'radio' && e.target.type !== 'checkbox') return;
@@ -170,7 +148,6 @@
       else if (e.key === 'ArrowRight') { stop(); stepFwd(); render(); }
       else if (e.key === 'ArrowLeft') { stop(); stepBack(); render(); }
     });
-    ['speed', 'size', 'perr', 'merr'].forEach(id => $(id).oninput());
     syncUI(); init();
   });
 })();

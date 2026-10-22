@@ -29,8 +29,7 @@
 
         .sim-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem 2rem; margin: 1rem 0; }
         .sim-controls label { display: block; font-size: 0.9em; margin-bottom: 0.2rem; }
-        .sim-controls input[type=range] { width: 100%; }
-        .sim-controls select { width: 100%; }
+        .sim-controls input[type=number] { width: 5.5rem; }
         .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 1rem 0; }
         .transport button { min-width: 2.6rem; margin: 0; }
         .display label, .regime label { display: inline-block; margin-right: 1rem; }
@@ -40,8 +39,7 @@
         .panels figcaption { text-align: center; font-size: 0.9em; margin-top: 0.4rem; }
         #frame-label { text-align: center; font-size: 1.5em; margin: 1rem 0 0; }
         #step-name { text-align: center; margin: 0 0 0.5rem; font-size: 0.95em; }
-        #legend { list-style: none; padding: 0; columns: 2; margin: 0.5rem 0; }
-        @media (max-width: 700px) { .panels { grid-template-columns: minmax(0, 1fr); } #legend { columns: 1; } }
+        @media (max-width: 700px) { .panels { grid-template-columns: minmax(0, 1fr); } }
     </style>
 </head>
 
@@ -103,32 +101,25 @@
             <label><input type="radio" name="regime" value="online"> online</label>
         </div>
         <div>
-            <label for="size">System size: <span id="size-val"></span></label>
-            <input type="range" id="size" min="5" max="31" step="1" value="13">
+            <label for="size">d = <input type="number" id="size" min="5" max="31" step="1" value="13"></label>
         </div>
         <div>
-            <label for="perr" id="perr-label">data error rate</label>
-            <input type="range" id="perr" min="0" max="100" step="1" value="10"> <span id="perr-val"></span>
+            <label for="perr">&epsilon;<sub>d</sub> = <input type="number" id="perr" min="0" max="1" step="0.01" value="0.1"></label>
         </div>
         <div id="merr-row" hidden>
-            <label for="merr">meas error rate</label>
-            <input type="range" id="merr" min="0" max="100" step="1" value="0"> <span id="merr-val"></span>
+            <label for="merr">&epsilon;<sub>m</sub> = <input type="number" id="merr" min="0" max="1" step="0.01" value="0"></label>
         </div>
         <div>
-            <label for="speed">Animation speed</label>
-            <input type="range" id="speed" min="1" max="40" step="1" value="5"> <span id="speed-val"></span>
+            <label for="speed">speed = <input type="number" id="speed" min="1" max="40" step="1" value="5"> steps/s</label>
         </div>
     </div>
 
     <div class="transport">
-        <button id="init">Initialize</button>
         <button id="reset">Reset</button>
         &nbsp;
-        <button id="back-iter" title="previous iteration">&#9664;&#9664;</button>
         <button id="back" title="step back">&#9664;</button>
         <button id="play" title="play / pause">&#9654;</button>
         <button id="fwd" title="step forward">&#9654;|</button>
-        <button id="fwd-iter" title="next iteration">&#9654;&#9654;</button>
     </div>
 
     <div id="frame-label"></div>
@@ -144,21 +135,6 @@
             <figcaption>Stacks &amp; anti-signals</figcaption>
         </figure>
     </div>
-
-    <h4>Legend</h4>
-    <ul id="legend"></ul>
-
-    <ol>
-    <li>
-        A single particle is represented per site, according to the following priority order:
-        <ul style="list-style-type: disc;">
-            <li>defects &gt; 1-forward-signals &gt; 2-forward-signals</li>
-            <li>1-stacks &gt; 2-stacks &gt; 1-anti-signals &gt; 2-anti-signals</li>
-        </ul>
-    </li>
-    <li>Multiple signals of the same type at a site are represented as a square.</li>
-    <li>The highest value of each local stack is shown in white.</li>
-    </ol>
 
     <h3>Elementary Update Mechanisms</h3>
 
@@ -218,5 +194,6 @@
 
 <script src="decoder.js?v=3"></script>
 <script src="animation.js?v=3"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="gRBqiLz/1rN20jyi1FL5UA==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
