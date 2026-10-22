@@ -17,6 +17,7 @@
                     --nc-lk-1: #0070F3; --nc-lk-2: #0366D6; --nc-lk-tx: #FFFFFF; --nc-ac-1: #79FFE1; --nc-ac-tx: #0C4047; }
         }
         html, body { background: #fff; }
+        body { max-width: min(1500px, 95vw); margin: 0 auto; }
         img.orcid-logo {
             vertical-align: middle;
             height: 1em;
@@ -93,7 +94,7 @@
 
     <p>
         Run the decoder step by step. The step <strong>j</strong> of iteration <strong>i</strong> is indicated as <strong>i.j</strong>
-        (the three anti-signal propagations are all labelled 5).
+        (the anti-signal sub-steps are all labelled 5).
         Arrow keys step through the dynamics, space plays or pauses.
     </p>
 
@@ -112,7 +113,7 @@
             <label for="perr">&epsilon;<sub>d</sub> = <input type="number" id="perr" min="0" max="1" step="0.01" value="0.1"></label>
         </div>
         <div id="merr-row" hidden>
-            <label for="merr">&epsilon;<sub>m</sub> = <input type="number" id="merr" min="0" max="1" step="0.01" value="0.01"></label>
+            <label for="merr">&epsilon;<sub>m</sub> = <input type="number" id="merr" min="0" max="1" step="0.01" value="0"></label>
         </div>
         <div>
             <label for="speed">speed = <input type="number" id="speed" min="1" max="40" step="1" value="5"> steps/s</label>
@@ -120,6 +121,7 @@
     </div>
 
     <div class="transport">
+        <button id="init">Reinitialize</button>
         <button id="reset">Reset</button>
         &nbsp;
         <button id="back" title="step back">&#124;&#9664;</button>
@@ -201,6 +203,6 @@
 
 <script src="decoder.js?v=3"></script>
 <script src="animation.js?v=3"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="dZBvcOAPzpEcof/DiGKGHQ==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="tFvFTIWbFthqnPo5dX0VeQ==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
