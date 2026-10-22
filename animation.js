@@ -140,7 +140,8 @@
     $('back').onclick = () => { stop(); stepBack(); render(); };
     $('fwd').onclick = () => { stop(); stepFwd(); render(); };
     $('play').onclick = togglePlay;
-    document.querySelectorAll('input[name=regime], #size, #perr, #merr').forEach(el => el.onchange = () => { syncUI(); init(); });
+    document.querySelectorAll('input[name=regime]').forEach(el => el.onchange = () => { $('perr').value = el.value === 'online' ? 0.01 : 0.1; syncUI(); init(); });
+    document.querySelectorAll('#size, #perr, #merr').forEach(el => el.onchange = () => { syncUI(); init(); });
     window.addEventListener('resize', () => dec && render());
     document.addEventListener('keydown', e => {
       if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName) && e.target.type !== 'radio' && e.target.type !== 'checkbox') return;
