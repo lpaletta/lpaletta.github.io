@@ -134,7 +134,7 @@
   function legend() {
     const groups = [
       ['legend-a', [['defect', 'o', COL.defect], ['1-forward signal', 0, COL.f1], ['2-forward signal', 0, COL.f2], ['several signals', 's', COL.f1]]],
-      ['legend-b', [['1-stack', 'o', COL.s1, '2'], ['2-stack', 'o', COL.s2, '1'], ['1-anti-signal', 0, COL.s1], ['2-anti-signal', 0, COL.s2], ['data error', 'e']]]
+      ['legend-b', [['1-stack (top value)', 'o', COL.s1, '2'], ['2-stack (top value)', 'o', COL.s2, '1'], ['1-anti-signal', 0, COL.s1], ['2-anti-signal', 0, COL.s2], ['data error', 'e']]]
     ];
     for (const [ulId, items] of groups) {
       const ul = $(ulId); ul.innerHTML = '';
