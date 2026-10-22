@@ -34,13 +34,14 @@
         .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 1rem 0; }
         .transport button { min-width: 2.6rem; margin: 0; }
         .display label, .regime label { display: inline-block; margin-right: 1rem; }
-        .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.5rem 0; }
+        .panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; margin: 0.5rem 0; }
+        .panels figure { margin: 0; min-width: 0; }
         .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; }
         .panels figcaption { text-align: center; font-size: 0.9em; margin-top: 0.4rem; }
         #frame-label { text-align: center; font-size: 1.5em; margin: 1rem 0 0; }
         #step-name { text-align: center; margin: 0 0 0.5rem; font-size: 0.95em; }
         #legend { list-style: none; padding: 0; columns: 2; margin: 0.5rem 0; }
-        @media (max-width: 700px) { .panels { grid-template-columns: 1fr; } #legend { columns: 1; } }
+        @media (max-width: 700px) { .panels { grid-template-columns: minmax(0, 1fr); } #legend { columns: 1; } }
     </style>
 </head>
 
@@ -146,12 +147,6 @@
 
     <h4>Legend</h4>
     <ul id="legend"></ul>
-
-    <p>
-        <em>Offline</em>: errors are placed once and the decoder runs on the resulting syndrome until the zero configuration is reached.
-        <em>Online</em>: new data errors (and optionally measurement errors) are injected at the start of every iteration and the decoder never stops.
-        The torus has periodic boundaries.
-    </p>
 
     <ol>
     <li>
