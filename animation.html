@@ -21,32 +21,22 @@
             font-weight: bold;
         }
 
-        .gif-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .gif-grid figure {
-            text-align: center;
-        }
-
-        .gif-grid img {
-            max-width: 100%;
-            border-radius: 6px;
-        }
-
-        .gif-grid figcaption {
-            margin-top: 0.75rem;
-            font-size: 0.95em;
-        }
-
-        @media (max-width: 700px) {
-            .gif-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        .sim-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem 2rem; margin: 1rem 0; }
+        .sim-controls label { display: block; font-size: 0.9em; margin-bottom: 0.2rem; }
+        .sim-controls input[type=range] { width: 100%; }
+        .sim-controls select { width: 100%; }
+        .transport { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 1rem 0; }
+        .transport button { min-width: 2.6rem; margin: 0; }
+        .display label, .regime label { display: inline-block; margin-right: 1rem; }
+        .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.5rem 0; }
+        .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; }
+        .panels figcaption { text-align: center; font-size: 0.9em; margin-top: 0.4rem; }
+        #frame-label { text-align: center; font-size: 1.5em; margin: 1rem 0 0; }
+        #step-name { text-align: center; margin: 0 0 0.5rem; font-size: 0.95em; }
+        #state { display: grid; grid-template-columns: max-content 1fr; gap: 0.15rem 1.2rem; margin: 0.5rem 0; }
+        #state dt { font-weight: bold; } #state dd { margin: 0; }
+        #legend { list-style: none; padding: 0; columns: 2; margin: 0.5rem 0; }
+        @media (max-width: 700px) { .panels { grid-template-columns: 1fr; } #legend { columns: 1; } }
     </style>
 </head>
 
@@ -93,30 +83,95 @@
         The rule dynamically mediates an effective attractive interaction between defects via the propagation of 1- and 2-forward-signals. Stack and anti-signal dynamics erase forward-signals at the end, ensuring the decoder eventually returns to the zero configuration.
     </p>
 
-    <h3>Visualization</h3>
+    <h3>Interactive simulation</h3>
 
-    <p>Dynamics of the decoder as animated GIF, the step <strong>j</strong> of iteration <strong>i</strong> is indicated as <strong>i.j</strong>.</p>
+    <p>
+        Run the decoder step by step. The step <strong>j</strong> of iteration <strong>i</strong> is indicated as <strong>i.j</strong>
+        (the three anti-signal propagations are all labelled 5).
+        Arrow keys step through the dynamics, space plays or pauses.
+    </p>
 
-    <div class="gif-grid">
-
-        <figure>
-            <img src="offline.gif"
-                 alt="Local decoder of the toric code in the offline regime">
-            <figcaption>
-                Offline regime
-            </figcaption>
-        </figure>
-
-        <figure>
-            <img src="online.gif"
-                 alt="Local decoder of the toric code in the online regime">
-            <figcaption>
-                Online regime<br>
-                (1% data error probability & perfect meas.)
-            </figcaption>
-        </figure>
-
+    <div class="sim-controls">
+        <div class="regime">
+            <label>Regime</label>
+            <label><input type="radio" name="regime" value="offline" checked> offline</label>
+            <label><input type="radio" name="regime" value="online"> online</label>
+        </div>
+        <div>
+            <label for="scenario">Initial errors</label>
+            <select id="scenario">
+                <option value="random">random</option>
+                <option value="manual">manual (click on edges)</option>
+                <option value="pair">pair of defects</option>
+                <option value="single">single measurement error</option>
+                <option value="persistent">persistent measurement error</option>
+            </select>
+        </div>
+        <div>
+            <label for="size">System size: <span id="size-val"></span></label>
+            <input type="range" id="size" min="5" max="31" step="1" value="13">
+        </div>
+        <div>
+            <label for="perr" id="perr-label">error probability</label>
+            <input type="range" id="perr" min="0" max="100" step="1" value="10"> <span id="perr-val"></span>
+        </div>
+        <div id="merr-row" hidden>
+            <label for="merr">measurement error probability</label>
+            <input type="range" id="merr" min="0" max="100" step="1" value="0"> <span id="merr-val"></span>
+        </div>
+        <div>
+            <label for="speed">Animation speed</label>
+            <input type="range" id="speed" min="1" max="40" step="1" value="5"> <span id="speed-val"></span>
+        </div>
     </div>
+
+    <div class="display">
+        <label>Display:</label>
+        <label><input type="checkbox" id="show-defects" checked> defects</label>
+        <label><input type="checkbox" id="show-errors" checked> errors</label>
+        <label><input type="checkbox" id="show-fwd" checked> forward signals</label>
+        <label><input type="checkbox" id="show-stack" checked> stacks</label>
+        <label><input type="checkbox" id="show-anti" checked> anti-signals</label>
+        <label><input type="checkbox" id="show-grid" checked> grid</label>
+    </div>
+
+    <div class="transport">
+        <button id="init">Initialize</button>
+        <button id="reset">Reset</button>
+        &nbsp;
+        <button id="back-iter" title="previous iteration">&#9664;&#9664;</button>
+        <button id="back" title="step back">&#9664;</button>
+        <button id="play" title="play / pause">&#9654;</button>
+        <button id="fwd" title="step forward">&#9654;|</button>
+        <button id="fwd-iter" title="next iteration">&#9654;&#9654;</button>
+    </div>
+    <p id="hint" hidden><em>Click on the edges between sites (left panel) to flip data qubits, then press play.</em></p>
+
+    <div id="frame-label"></div>
+    <p id="step-name"></p>
+
+    <div class="panels">
+        <figure>
+            <canvas id="cv-left" aria-label="Defects and forward signals"></canvas>
+            <figcaption>Defects &amp; forward signals</figcaption>
+        </figure>
+        <figure>
+            <canvas id="cv-right" aria-label="Stacks and anti-signals"></canvas>
+            <figcaption>Stacks &amp; anti-signals</figcaption>
+        </figure>
+    </div>
+
+    <h4>State</h4>
+    <dl id="state"></dl>
+
+    <h4>Legend</h4>
+    <ul id="legend"></ul>
+
+    <p>
+        <em>Offline</em>: errors are placed once and the decoder runs on the resulting syndrome until the zero configuration is reached.
+        <em>Online</em>: new data errors (and optionally measurement errors) are injected at the start of every iteration and the decoder never stops.
+        The torus has periodic boundaries.
+    </p>
 
     <ol>
     <li>
@@ -186,5 +241,7 @@
 
 </section>
 
+<script src="decoder.js"></script>
+<script src="animation.js"></script>
 </body>
 </html>
