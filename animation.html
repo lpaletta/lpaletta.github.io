@@ -33,7 +33,9 @@
         .side, .mech { padding-top: 0.5rem; }
         .side h3, .mech h3 { margin-top: 0; }
         .mech ol, .mech ul { padding-left: 1.2rem; }
-        #legend { list-style: none; padding: 0; margin: 0.5rem 0; columns: 2; gap: 0.5rem; }
+        #legend-a, #legend-b { list-style: none; padding: 0; margin: 0.5rem 0; }
+        .legend-cols { display: flex; gap: 1rem; }
+        .legend-cols ul { flex: 1; }
         .side .sim-controls { display: grid; gap: 0.35rem; margin: 0 0 0.8rem; }
         .side .sim-controls label { margin-bottom: 0.1rem; }
         .side input[type=number] { width: 5.5rem; }
@@ -68,7 +70,7 @@
 <section>
 
     <p>
-        This page presents animations of the 2D signal-rule decoder introduced in
+        This page presents illustrative animations of the 2D signal-rule decoders introduced in
         <em>Local decoder for the toric code via signal exchange</em>, L. Paletta (2026).
     </p>
 
@@ -114,11 +116,13 @@
         <figure>
             <canvas id="cv-left" aria-label="Defects and forward signals"></canvas>
             <figcaption>Defects &amp; forward signals</figcaption>
+            <figcaption>Priority rules:</figcaption>
             <figcaption>defects &gt; 1-forward-signals &gt; 2-forward-signals</figcaption>
         </figure>
         <figure>
             <canvas id="cv-right" aria-label="Stacks and anti-signals"></canvas>
             <figcaption>Stacks &amp; anti-signals</figcaption>
+            <figcaption>Priority rules:</figcaption>
             <figcaption>1-stacks &gt; 2-stacks &gt; 1-anti-signals &gt; 2-anti-signals</figcaption>
         </figure>
     </div>
@@ -126,8 +130,11 @@
 
     <aside class="mech">
     <h3>Legend</h3>
-    <ul id="legend"></ul>
-    <p>One particle per site (priority order below the panels)</p>
+    <div class="legend-cols">
+        <ul id="legend-a"></ul>
+        <ul id="legend-b"></ul>
+    </div>
+    <p>One particle per site (priority order below the panels)<br>stack value shown = max of the site's stacks</p>
 
     <h3>Update steps</h3>
 
@@ -158,8 +165,8 @@
 
 </section>
 
-<script src="decoder.js?v=5"></script>
-<script src="animation.js?v=5"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="xz7lgzv/QM1NHsoyC7XCUQ==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script src="decoder.js?v=7"></script>
+<script src="animation.js?v=7"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="9wEii4Bf1fnbUD5n9yi+UA==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>

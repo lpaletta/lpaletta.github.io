@@ -132,15 +132,19 @@
 
   // ---------- legend ----------
   function legend() {
-    const items = [['defect', 'o', COL.defect], ['1-forward signal', 0, COL.f1], ['2-forward signal', 0, COL.f2], ['several signals', 's', COL.f1],
-      ['1-stack (top value)', 'o', COL.s1, '2'], ['2-stack (top value)', 'o', COL.s2, '1'], ['1-anti-signal', 0, COL.s1], ['2-anti-signal', 0, COL.s2], ['data error', 'e']];
-    $('legend').innerHTML = '';
-    for (const [label, kind, color, num] of items) {
-      const li = document.createElement('li'), cv = document.createElement('canvas'); cv.width = cv.height = 44; cv.style.cssText = 'width:22px;height:22px;vertical-align:middle;margin-right:6px';
-      const ctx = cv.getContext('2d'); ctx.scale(2, 2);
-      if (kind === 'e') { ctx.strokeStyle = COL.err; ctx.lineWidth = 3.5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(3, 11); ctx.lineTo(19, 11); ctx.stroke(); }
-      else { marker(ctx, kind, 11, 11, 8, color); if (num) { ctx.fillStyle = '#fff'; ctx.font = 'bold 11.5px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(num, 11, 10.5); } }
-      li.append(cv, label); $('legend').append(li);
+    const groups = [
+      ['legend-a', [['defect', 'o', COL.defect], ['1-forward signal', 0, COL.f1], ['2-forward signal', 0, COL.f2], ['several signals', 's', COL.f1]]],
+      ['legend-b', [['1-stack', 'o', COL.s1, '2'], ['2-stack', 'o', COL.s2, '1'], ['1-anti-signal', 0, COL.s1], ['2-anti-signal', 0, COL.s2], ['data error', 'e']]]
+    ];
+    for (const [ulId, items] of groups) {
+      const ul = $(ulId); ul.innerHTML = '';
+      for (const [label, kind, color, num] of items) {
+        const li = document.createElement('li'), cv = document.createElement('canvas'); cv.width = cv.height = 44; cv.style.cssText = 'width:22px;height:22px;vertical-align:middle;margin-right:6px';
+        const ctx = cv.getContext('2d'); ctx.scale(2, 2);
+        if (kind === 'e') { ctx.strokeStyle = COL.err; ctx.lineWidth = 3.5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(3, 11); ctx.lineTo(19, 11); ctx.stroke(); }
+        else { marker(ctx, kind, 11, 11, 8, color); if (num) { ctx.fillStyle = '#fff'; ctx.font = 'bold 11.5px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(num, 11, 10.5); } }
+        li.append(cv, label); ul.append(li);
+      }
     }
   }
 
@@ -156,7 +160,7 @@
     $('back').onclick = () => { stop(); stepBack(); render(); };
     $('fwd').onclick = () => { stop(); stepFwd(); render(); };
     $('play').onclick = togglePlay;
-    document.querySelectorAll('input[name=regime]').forEach(el => el.onchange = () => { $('perr').value = el.value === 'online' ? 0.01 : 0.1; syncUI(); init(); });
+    document.querySelectorAll('input[name=regime]').forEach(el => el.onchange = () => { $('perr').value = el.value === 'online' ? 0.01 : 0.05; syncUI(); init(); });
     document.querySelectorAll('#size, #perr, #merr').forEach(el => el.onchange = () => { syncUI(); init(); });
     window.addEventListener('resize', () => dec && render());
     document.addEventListener('keydown', e => {
