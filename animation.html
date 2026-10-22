@@ -27,7 +27,7 @@
             font-weight: bold;
         }
 
-        .layout { display: grid; grid-template-columns: 1fr 4fr 1fr; gap: 1.5rem; align-items: start; margin: 1.5rem auto;
+        .layout { display: grid; grid-template-columns: 1fr 3fr 1fr; gap: 1.5rem; align-items: center; margin: 1.5rem auto;
                   width: 95vw; position: relative; left: 50%; transform: translateX(-50%);
                   background: #f2f2f2; padding: 1rem 1.5rem; border-radius: 8px; box-sizing: border-box; }
         .mech h3 { margin-top: 0; }
@@ -43,7 +43,7 @@
         .panels figure { margin: 0; min-width: 0; }
         .panels canvas { width: 100%; display: block; border: 1px solid var(--nc-bg-3, #ddd); border-radius: 6px; }
         .panels figcaption { text-align: center; margin-top: 0.4rem; }
-        #frame-label { text-align: center; margin: 0.5rem 0; }
+        #frame-label { text-align: center; margin: 0.5rem 0; font-size: 1.25em; }
         #step-name { display: none; }
         @media (max-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr); width: auto; position: static; transform: none; } .panels { grid-template-columns: minmax(0, 1fr); } }
     </style>
@@ -70,28 +70,6 @@
         <em>Local decoder for the toric code via signal exchange</em>, L. Paletta (2026).
     </p>
 
-    <h3>Layout</h3>
-
-    <p>Each lattice site stores:</p>
-    <ul>
-        <li>Defect (−1 stabilizer outcome)</li>
-        <li>16 binary variables: 1- and 2-forward-signals, 1- and 2-anti-signals (by cardinal direction)</li>
-        <li>8 integer variables: 1- and 2-stacks (by cardinal direction)</li>
-    </ul>
-
-    <figure style="text-align: center; margin: 2rem 0;">
-        <img src="localstatespace.png"
-             alt="Schematic of 2D signal-rule decoder"
-             style="max-width: 85%; border-radius: 6px;">
-        <figcaption>
-            Local state space
-        </figcaption>
-    </figure>
-
-    <p>
-        The rule dynamically mediates an effective attractive interaction between defects via the propagation of 1- and 2-forward-signals. Stack and anti-signal dynamics erase forward-signals at the end, ensuring the decoder eventually returns to the zero configuration.
-    </p>
-
     <h3>Interactive simulation</h3>
 
     <p>
@@ -102,6 +80,7 @@
 
     <div class="layout">
     <aside class="side">
+    <h3>Options</h3>
     <div class="sim-controls">
         <div class="regime">
             <label>Regime</label>
@@ -150,25 +129,59 @@
     </div>
 
     <aside class="mech">
-    <h3>Elementary Update Mechanisms</h3>
+    <h3>Update steps</h3>
 
     <ol>
-        <li><em>Matching</em> of neighboring defects</li>
-        <li><em>Creation</em> of 1-forward-signals</li>
-        <li><em>Propagation</em> of 1-forward-signals</li>
-        <li><em>Creation</em> of 2-forward-signals</li>
-        <li><em>Propagation</em> of 2-forward-signals</li>
-        <li><em>Attraction</em> of defects</li>
-        <li><em>Creation</em> of anti-signals</li>
-        <li><em>Propagation &amp; recombination</em> of anti-signals</li>
+        <li>Matching of neighboring defects</li>
+        <li>1-forward dynamics
+            <ol type="a">
+                <li>Creation of 1-forward-signals</li>
+                <li>Propagation of 1-forward-signals</li>
+            </ol>
+        </li>
+        <li>2-forward dynamics
+            <ol type="a">
+                <li>Creation of 2-forward-signals</li>
+                <li>Propagation of 2-forward-signals</li>
+            </ol>
+        </li>
+        <li>Attraction of defects</li>
+        <li>Anti-signal dynamics
+            <ol type="a">
+                <li>Creation of anti-signals</li>
+                <li>Propagation &amp; recombination of anti-signals (×3)</li>
+            </ol>
+        </li>
     </ol>
     </aside>
     </div>
+
+    <h3>Layout</h3>
+
+    <p>Each lattice site stores:</p>
+    <ul>
+        <li>Defect (−1 stabilizer outcome)</li>
+        <li>16 binary variables: 1- and 2-forward-signals, 1- and 2-anti-signals (by cardinal direction)</li>
+        <li>8 integer variables: 1- and 2-stacks (by cardinal direction)</li>
+    </ul>
+
+    <figure style="text-align: center; margin: 2rem 0;">
+        <img src="localstatespace.png"
+             alt="Schematic of 2D signal-rule decoder"
+             style="max-width: 85%; border-radius: 6px;">
+        <figcaption>
+            Local state space
+        </figcaption>
+    </figure>
+
+    <p>
+        The rule dynamically mediates an effective attractive interaction between defects via the propagation of 1- and 2-forward-signals. Stack and anti-signal dynamics erase forward-signals at the end, ensuring the decoder eventually returns to the zero configuration.
+    </p>
 
 </section>
 
 <script src="decoder.js?v=3"></script>
 <script src="animation.js?v=3"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="eRn1hR6a36nHraKlCsbVvg==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" nonce="1Vqe9LlF1hj8Dy3CqVXPZQ==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>

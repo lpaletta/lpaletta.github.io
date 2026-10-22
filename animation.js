@@ -4,10 +4,11 @@
   window.addEventListener('error', e => { const s = $('step-name'); if (s) s.textContent = 'Error: ' + e.message + ' (' + (e.filename || '').split('/').pop() + ':' + e.lineno + ')'; });
   const COL = { defect: '#0071bc', f1: '#0071bc', f2: '#b4c8e6', s1: '#fbb03b', s2: '#f7ddbb', err: '#d7263d' };
   const ANGLE = [0, -Math.PI / 2, Math.PI, Math.PI / 2];           // E, N(up), W, S(down)
-  const STEPS = ['syndrome measurement', 'matching', '1-forward signals: creation & propagation',
-    '2-forward signals: creation & propagation', 'attraction', 'anti-signals: creation',
-    'anti-signals: propagation & recombination (1/3)', 'anti-signals: propagation & recombination (2/3)',
-    'anti-signals: propagation & recombination (3/3)'];
+  const STEPS = ['syndrome measurement', 'matching of neighboring defects', 'creation & propagation of 1-forward-signals',
+    'creation & propagation of 2-forward-signals', 'attraction of defects', 'anti-signals: creation',
+    'anti-signals: propagation & recombination (2/4)',
+    'anti-signals: propagation & recombination (3/4)',
+    'anti-signals: propagation & recombination (4/4)'];
   const MAXF = 1500;                                                      // history length cap
 
   let dec, frames, idx, L = 13, timer = null;
@@ -88,8 +89,7 @@
 
   function render() {
     const j = Math.min(dec.ph, 5);
-    $('frame-label').textContent = `iter. ${dec.it + 1}.${j}`;
-    $('step-name').textContent = `step ${dec.ph}: ${STEPS[dec.ph]}`;
+    $('frame-label').textContent = `iter. ${dec.it + 1}.${j} : ${STEPS[dec.ph]}`;
     draw($('cv-left'), 0); draw($('cv-right'), 1);
     $('back').disabled = idx === 0;
     $('play').textContent = timer ? '⏸' : '▶';
@@ -136,6 +136,7 @@
     $('merr-row').hidden = !online;
   }
   window.addEventListener('DOMContentLoaded', () => {
+    $('init').onclick = () => { syncUI(); init(); };
     $('reset').onclick = reset;
     $('back').onclick = () => { stop(); stepBack(); render(); };
     $('fwd').onclick = () => { stop(); stepFwd(); render(); };
